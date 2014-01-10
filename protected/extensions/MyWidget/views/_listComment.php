@@ -2,7 +2,7 @@
 	<div class="row-fluid">
  		<div class="span9">
 			<b><font color="green"><?php echo $comment->author; ?></font></b>:
-			<font color="#a8a8a8"><?php echo $comment->date; ?></font>
+			<font color="#a8a8a8"><?php echo date('Y-m-d G:H:i',strtotime($comment->date)); ?></font>
 		</div>
     	<!-- <div class="row-fluid"> -->
  			<div class="span10">

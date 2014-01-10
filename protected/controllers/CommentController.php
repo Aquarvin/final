@@ -53,7 +53,7 @@ class CommentController extends Controller
 		Comment::model()->deleteByPk($id);
 		# ниже приведенный пример не работает. странно
 		// $model->delete(); // удаляем строку из таблицы
-		$this->redirect('index.php?r=note/view&id='.$note_id);
+		$this->redirect(array('note/view','id'=>$note_id));
 	}
 }
 
