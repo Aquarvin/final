@@ -1,5 +1,3 @@
-
-
 <div class="comment">
 
 	<div class="author">

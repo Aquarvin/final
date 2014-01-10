@@ -18,11 +18,11 @@
     <?php echo $form->error($comment,'author'); ?>
 </div>
 
-<?if(CCaptcha::checkRequirements()):?>
-    <?=CHtml::activeLabelEx($comment, 'verifyCode')?>
-    <?$this->widget('CCaptcha')?>
-    <?=CHtml::activeTextField($comment, 'verifyCode')?>
-<?endif?>
+<?php if(CCaptcha::checkRequirements()):?>
+    <?php echo CHtml::activeLabelEx($comment, 'verifyCode')?>
+    <?php $this->widget('CCaptcha')?>
+    <?php echo CHtml::activeTextField($comment, 'verifyCode')?>
+<?php endif ?>
 
 <div class="row submit">
     <?php echo CHtml::submitButton( Yii::t('main', 'Create'), array('class' => 'btn')); ?>

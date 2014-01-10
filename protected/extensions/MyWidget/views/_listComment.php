@@ -10,12 +10,12 @@
 			</div>
 		
     	<!-- </div> -->
-    		<?if ($delete): ?>
+    		<?php if ($delete): ?>
  			<div class="span12">
-				<?echo CHtml::link(Yii::t('main','Delete'),array('comment/delete','id'=>$comment->id,'note_id'=>$note_id),
+				<?php echo CHtml::link(Yii::t('main','Delete'),array('comment/delete','id'=>$comment->id,'note_id'=>$note_id),
                                         	array('class'=>'btn pull-right')); ?>
 			</div>
-			<?endif?>
+			<?php endif ?>
     </div>
 </div>
 <hr>
