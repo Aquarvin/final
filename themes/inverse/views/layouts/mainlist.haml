@@ -1,0 +1,114 @@
+!!!
+%html
+	%head
+		%title Application Notes
+		%meta(http-equiv = "Content-Type" content = "text/html; charset=utf-8")
+		%link(href= "/css/style.css" rel= "stylesheet")
+
+	%body	
+		:php
+			$activeHome= false;
+			$activeCreate= false;
+			$action = $this->getAction()->getID();
+			switch ($action) {
+				case 'index':
+						$body_title = 'Notes list';
+						$activeHome = true;
+					break;
+				case 'author':
+						$actionParams=$this->getActionParams();
+						$body_title = 'Author\'s Notes list';
+					break;
+				case 'create':
+						$body_title = 'Creat new note';
+						$activeCreate = true;
+					break;
+				case 'view':
+						$body_title = 'Note';
+					break;
+				case 'edit':
+						$body_title = 'Edit note';
+					break;
+					case 'login':
+						$body_title = 'Authorization';
+					break;
+				case 'search':
+						$actionParams=$this->getActionParams();
+						$body_title = 'Search results';
+					break;
+					default:
+						$body_title = $action;
+						break;
+			}
+			$url = Yii::app()->createUrl('note/search');
+			$this->widget(
+				'bootstrap.widgets.TbNavbar',
+				array(
+					'type'=>'inverse',					
+					'brand' => Yii::t('main','Note'),
+					'brandUrl' => '#',
+					//'collapse' => true, // requires bootstrap-responsive.css
+					'fixed' => false,
+					'items' => array(
+						array(
+							'class' => 'bootstrap.widgets.TbMenu',
+							'items' => array(
+								array('label' => Yii::t('main','Home'), 'url' => Yii::app()->createUrl('note/index'), 'active' => $activeHome),
+								array('label' => CHtml::encode(Yii::t('main','Create')), 'url' => Yii::app()->createUrl('note/create'), 'active' => $activeCreate),
+							),
+						),
+						'<form class="navbar-search pull-left" action="'.$url.'" method="GET">
+						<input name="r" hidden value="note/search">
+						<input type="text" name="search" class="search-query span2" placeholder="'.Yii::t('main','Search').'">&nbsp;
+						<input type="submit" class="btn" value="' .Yii::t('main','Search'). '"/></form>',
+						array(
+							'class' => 'bootstrap.widgets.TbMenu',
+							'htmlOptions' => array('class' => 'pull-right'),
+							'items' => array(
+								array('label'=>Yii::t('main','Themes'), 
+									'type'=>'inverse',
+									'items'=>array(
+										array('label'=>'Inverse', 'url'=>Yii::app()->createUrl('note/theme',array('theme'=>'inverse'))),
+										array('label'=>'Classic', 'url'=>Yii::app()->createUrl('note/theme',array('theme'=>'classic'))),
+									),
+								),	
+								array('label'=>Yii::app()->user->checkAccess('role_admin')?Yii::t('main','Admin'):'','url'=>Yii::app()->createUrl('admin')),
+								'---',
+								array('label' => Yii::app()->user->isGuest?Yii::t('main','Login'):Yii::t('main','Logout').' ('.Yii::app()->user->name.')' , 'url' => Yii::app()->user->isGuest?Yii::app()->createUrl('note/login'):Yii::app()->createUrl('note/logout')),
+							),
+						),
+					),
+				)
+			);
+		.breadcrumbs
+			:php
+				if (isset($this->module->id))
+				{
+					$this->breadcrumbs=array(
+						Yii::t('main',ucfirst($this->module->id)),
+					);
+				}elseif ($this->action->id=='index')
+				{
+					$this->breadcrumbs=array('');
+				}else
+				{
+					$this->breadcrumbs=array(
+						Yii::t('main',ucfirst($this->action->id)),
+					);
+				}
+				$this->widget(
+					'bootstrap.widgets.TbBreadcrumbs',
+					array(
+						'links' => $this->breadcrumbs,
+					)
+				);
+		
+
+
+	-foreach(Yii::app()->user->getFlashes() as $key => $message)
+		.alert(class="alert-#{$key}")= $message
+
+
+%fieldset.content
+	%legend(style="text-align: left;")= Yii::t('main',$body_title).(isset($actionParams[$action])?": '".$actionParams[$action]."'":'')
+	= $content

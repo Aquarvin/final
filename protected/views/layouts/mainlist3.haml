@@ -1,0 +1,70 @@
+!!!
+%html
+	%head
+		%title Application Notes
+		%meta(http-equiv = "Content-Type" content = "text/html; charset=utf-8")
+		%link(href="./css/bootstrap/css/bootstrap.css" rel="stylesheet")
+		%link(href= "./css/bootstrap/css/bootstrap-responsive.css" rel="stylesheet")
+		%link(href= "./css/style.css" rel= "stylesheet")
+
+	%body
+		:php
+			$classHome= '';
+			$classCreate= '';
+			$action = $this->getAction()->getID();
+			switch ($action) {
+				case 'index':
+						$body_title = 'Notes list';
+						$classHome = "active";
+					break;
+				case 'author':
+						$actionParams=$this->getActionParams();
+						$body_title = 'Author\'s Notes list';
+					break;
+				case 'create':
+						$body_title = 'Creat new note';
+						$classCreate = "active";
+					break;
+				case 'view':  
+						$body_title = 'Note';
+					break;
+				case 'edit':
+						$body_title = 'Edit note';
+					break; 
+					case 'login':
+						$body_title = 'Authorization';
+					break;  
+				case 'search':
+						$actionParams=$this->getActionParams();
+						$body_title = 'Search results';
+					break;
+					default:
+						$body_title = $action;
+						break;
+			}
+	%form.nav(action="index.php" method="GET")
+		.navbar
+			.navbar-inner
+				%a.brand= Yii::t('main','Note')
+				%ul.nav.inline
+					%li(class="#{$classHome}")
+						%a{:href=> "index.php"}= Yii::t('main','Home')
+					%li{:class="#{$classCreate}"}= CHtml::link(CHtml::encode(Yii::t('main','Create')),array('create'))
+					%li	
+						%input.search-query{:type="text" :name="search" :placeholder="#{Yii::t('main','Search')}"}
+					%li 	
+						%button.btn{:type="submit" :name=>"r" :value="note/search"}= Yii::t('main','Search')
+					-if (!Yii::app()->user->isGuest)
+						%li
+							%a= Yii::app()->user->name
+						%li= CHtml::link(Yii::t('main','Logout'),array('note/logout',))
+					-else
+						%li= CHtml::link(Yii::t('main','Login'),array('note/login',));
+
+
+	-foreach(Yii::app()->user->getFlashes() as $key => $message)
+		.alert(class="alert-#{$key}")= $message
+
+%fieldset.content
+	%legend(style="text-align: left;")= Yii::t('main',$body_title).(isset($actionParams[$action])?": '".$actionParams[$action]."'":'')
+	= $content

@@ -1,0 +1,56 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "0e45da954528a32df452a513e3c9148e",
+    "packages": [
+        {
+            "name": "delfit/phamlp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/delfit/phamlp",
+                "reference": "master"
+            },
+            "type": "library",
+            "time": "2013-06-04 11:15:10"
+        },
+        {
+            "name": "delfit/yii-haml",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/delfit/yii-haml.git",
+                "reference": "2514ba514d824b7c0d3bc077d34f47410576a5d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/delfit/yii-haml/archive/2514ba514d824b7c0d3bc077d34f47410576a5d6.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "description": "HAML View Renderer for Yii Framework",
+            "homepage": "https://github.com/delfit/yii-haml",
+            "time": "2013-06-04 11:36:04"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "delfit/phamlp": 20,
+        "delfit/yii-haml": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

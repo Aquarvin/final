@@ -1,0 +1,44 @@
+.body {
+    padding-left: 20px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.breadcrumbs{
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+}
+.page {
+    padding-bottom: 20px;
+    text-align: center;
+}
+.search-query{
+    margin-top: 7px;
+}
+.navbar{
+    max-width: 900px;
+    margin: 0 auto;
+}
+.content{
+    padding-left: 20px;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    }
+.alert{
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto;
+}
+.row {
+    position:relative;
+    padding-left: 50px;
+}
+.comments {
+    max-width: 900px;
+    margin: 0 auto;
+}
+.navbar-search{
+    margin-top: -2px;
+}
