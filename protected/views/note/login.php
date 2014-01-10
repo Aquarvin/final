@@ -50,4 +50,8 @@ $this->breadcrumbs=array(
 	</div>
 
 <?php $this->endWidget(); ?>
+
+<script src="//ulogin.ru/js/ulogin.js"></script>
+<div id="uLogin" data-ulogin="display=small;fields=first_name,last_name;providers=vkontakte;hidden=other;redirect_uri=http%3A%2F%2F"></div>
+
 </div><!-- form -->
