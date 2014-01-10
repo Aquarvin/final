@@ -1,15 +1,15 @@
     <dl class="dl-horizontal">
-      <dt><?echo Yii::t('main','Title');?></dt>
-      <dd><?=$model->title?></dd>
-      <dt><?echo Yii::t('main','Text');?></dt>
-      <dd><?echo nl2br($model->note); ?></dd>
-      <dt><?echo Yii::t('main','Author');?></dt>
-      <dd><?=$model->author->name?></dd>
+      <dt><?php echo Yii::t('main','Title');?></dt>
+      <dd><?php echo $model->title?></dd>
+      <dt><?php echo Yii::t('main','Text');?></dt>
+      <dd><?php echo nl2br($model->note); ?></dd>
+      <dt><?php echo Yii::t('main','Author');?></dt>
+      <dd><?php echo $model->author->name?></dd>
     </dl>
   </fieldset>
 <!-- кнопочки под заметкой -->
 <div class="content">
-      <? 
+      <?php 
       $params = array('model'=>$model);
       if (Yii::app()->user->checkAccess('delete_and_edit',$params)||Yii::app()->user->checkAccess('role_admin')): ?>
       
@@ -22,7 +22,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <?php  echo CHtml::link(Yii::t('main','Back'),array('note/index'),
                                         array('class'=>'btn')); ?>
-      <?endif?>
+      <?php endif ?>
         
 </div>
 <br>
