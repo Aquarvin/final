@@ -22,7 +22,7 @@ class CommentController extends Controller
             'accessControl',
         );
     }
-
+  
     public function accessRules() {
         return array(
             // если используется проверка прав, не забывайте разрешить доступ к
