@@ -16,7 +16,7 @@ class UserIdentity extends CUserIdentity
 	 * @return boolean whether authentication succeeds.
 	 */
 
-
+  
 	private $_id;
     public function authenticate()
     {
@@ -33,8 +33,6 @@ class UserIdentity extends CUserIdentity
         {
             $this->_id=$record->id;
             $this->setState('name', $record->name);
-            $this->setState('role', $record->role);
-
             $this->errorCode=self::ERROR_NONE;
         }
         return !$this->errorCode;

@@ -36,7 +36,7 @@ class NoteController extends Controller
             /** @var $eauth EAuthServiceBase */
             $eauth = Yii::app()->eauth->getIdentity($serviceName);
             $eauth->redirectUrl = Yii::app()->user->returnUrl;
-            $eauth->cancelUrl = $this->createAbsoluteUrl('site/login');
+            $eauth->cancelUrl = $this->createAbsoluteUrl('note/login');
             try {
             		//echo "sdfsdf"; die;
                 if ($eauth->authenticate()) {
@@ -48,6 +48,19 @@ class NoteController extends Controller
                         Yii::app()->user->login($identity);
                         //var_dump($identity->id, $identity->name, Yii::app()->user->id);exit;
 
+                        /***----- если сервис пользователя нет в таблице, то -----*****/
+                        if (!User::model()->findByAttributes(array('service_id'=>Yii::app()->user->id))) {
+
+		                    /****Добавляем автора в таблицу User ****/
+							$user = new User;
+							$user->name = Yii::app()->user->name;
+							$user->role = "role_author";
+							$user->service_id = Yii::app()->user->id;
+							$user->save();
+							// нахожу id только чnо ссозданного пользователя по service_id
+							// и присваиваю его в user->id.
+							Yii::app()->user->id = User::model()->findByAttributes(array('service_id'=>Yii::app()->user->id))->id;
+                        }
                         // special redirect with closing popup window
                         $eauth->redirect();
                     }
@@ -58,7 +71,7 @@ class NoteController extends Controller
                 }
 
                 // Something went wrong, redirect to login page
-                $this->redirect(array('site/login'));
+                $this->redirect(array('note/login'));
             }
             catch (EAuthException $e) {
                 // save authentication error to session
@@ -173,7 +186,9 @@ class NoteController extends Controller
 
 	public function actionCreate()
 	{
+
 		$model = new Note;
+
 		if(isset($_POST['Note'])) 
 		{
 			// 	$_POST['Note']['author_ID']=(int)$_POST['Note']['author_ID'];
@@ -227,16 +242,18 @@ class NoteController extends Controller
 	public function actionDelete($id)
 	{	
 		$model = Note::model()->findByPk($id);
-		$comments=$model->comments;
+		// $comments = $model->comments;
+		
+		/***отбираю название заметки для FLASH *****/
 		$message=Yii::t('main','Note')." '".$model->attributes['title']."' ".Yii::t('main','was deleted');
 		$level='info';
 		$category='DELETED.NOTE';
-		Yii::log($message, $level, $category);
-		Yii::app()->user->setFlash('error', $message);
-		Note::model()->deleteByPk($id);
-		# ниже приведенный пример не работает. странно
-		// $model->delete(); // удаляем строку из таблицы
-		$this->redirect('index');
+		Yii::log($message, $level, $category);		// вывожу в лог
+		Yii::app()->user->setFlash('error', $message); 		// заношу в FLASH
+		/*****   ---------------------------   *****/
+
+		$model->delete(); // удаляем строку из таблицы
+		$this->redirect(Yii::app()->createUrl('note/index'));
 		
 	}
 
@@ -246,16 +263,14 @@ class NoteController extends Controller
 		{
 			$this->redirect('index');
 		}
-		// $search = addcslashes($search, '%_');
+
 		$criteria = new CDbCriteria;
 		$criteria->alias='notes';
 		$criteria->join = 'LEFT JOIN users ON users.id=notes.author_id';
 		$criteria->select = 'notes.id, title, note, author_id';
 		$criteria->condition = 'CONCAT( title, note, users.name) LIKE :search';
 		$criteria->params = array(':search'=>"%$search%");
-		// var_dump($criteria);die;
-		#   вместо тех строк можно одну такую :
-		#  $criteria->addSearchCondition('CONCAT( title, NOTE, AUTHOR)', $search);   
+		
 		$dataProvider = new CActiveDataProvider('Note', array(
 				'criteria'=> $criteria,
 				'pagination'=>array(

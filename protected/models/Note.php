@@ -27,7 +27,7 @@ class Note extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('author_id, title', 'required'),
+			array('title', 'required'),
 			array('author_id', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>30),
 			array('note, date', 'safe'),

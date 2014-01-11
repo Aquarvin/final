@@ -157,6 +157,7 @@ return array(
 			'allowAutoLogin'=>true,
             // это значение устанавливается по умолчанию
             'loginUrl'=>array('note/login'),
+            'class' => 'WebUser',
     	),
 
     	'cache'=>array(
