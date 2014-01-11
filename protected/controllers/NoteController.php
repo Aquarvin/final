@@ -38,7 +38,6 @@ class NoteController extends Controller
             $eauth->redirectUrl = Yii::app()->user->returnUrl;
             $eauth->cancelUrl = $this->createAbsoluteUrl('note/login');
             try {
-            		//echo "sdfsdf"; die;
                 if ($eauth->authenticate()) {
                     //var_dump($eauth->getIsAuthenticated(), $eauth->getAttributes());
                     $identity = new EAuthUserIdentity($eauth);
@@ -46,21 +45,21 @@ class NoteController extends Controller
                     // successful authentication
                     if ($identity->authenticate()) {
                         Yii::app()->user->login($identity);
-                        //var_dump($identity->id, $identity->name, Yii::app()->user->id);exit;
+                        // var_dump($identity->id, $identity->name, Yii::app()->user->id);exit;
 
                         /***----- если сервис пользователя нет в таблице, то -----*****/
-                        if (!User::model()->findByAttributes(array('service_id'=>Yii::app()->user->id))) {
+                        if (!User::model()->findByAttributes(array('service_id'=>$identity->id))) {
 
 		                    /****Добавляем автора в таблицу User ****/
 							$user = new User;
 							$user->name = Yii::app()->user->name;
 							$user->role = "role_author";
-							$user->service_id = Yii::app()->user->id;
+							$user->service_id = $identity->id;
 							$user->save();
-							// нахожу id только чnо ссозданного пользователя по service_id
-							// и присваиваю его в user->id.
-							Yii::app()->user->id = User::model()->findByAttributes(array('service_id'=>Yii::app()->user->id))->id;
                         }
+							// нахожу id зашедшего пользователя по service_id
+							// и присваиваю его в user->id.
+							Yii::app()->user->setId(User::model()->findByAttributes(array('service_id'=>$identity->id))->id);
                         // special redirect with closing popup window
                         $eauth->redirect();
                     }
@@ -186,7 +185,7 @@ class NoteController extends Controller
 
 	public function actionCreate()
 	{
-
+		// echo "Note/create"; die;
 		$model = new Note;
 
 		if(isset($_POST['Note'])) 

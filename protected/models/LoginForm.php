@@ -60,6 +60,7 @@ class LoginForm extends CFormModel
 	 */
 	public function login()
 	{
+		// echo "Login Form login ". var_dump($this->_identity); die;
 		if($this->_identity===null)
 		{
 			$this->_identity=new UserIdentity($this->username,$this->password);

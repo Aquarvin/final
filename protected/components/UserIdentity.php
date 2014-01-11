@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 /**
  * UserIdentity represents the data needed to identity a user.

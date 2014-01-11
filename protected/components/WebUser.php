@@ -1,4 +1,4 @@
-<?php
+<?php 
 class WebUser extends CWebUser {
     private $_model = null;
  
@@ -11,12 +11,7 @@ class WebUser extends CWebUser {
  
     private function getModel(){
         if (!$this->isGuest && $this->_model === null){
-            $this->_model = User::model()->findByPk($this->id, array('select' => 'role'));
-            if (empty($this->_model));
-            {
-                $this->_model=User::model()->findByPk(1, array('select' => 'role'));
-            }
-            // echo var_dump($this->_model); die;
+            $this->_model = User::model()->findByPk($this->getId(), array('select' => 'role'));
         }
         return $this->_model;
     }

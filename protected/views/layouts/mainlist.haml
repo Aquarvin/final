@@ -71,7 +71,7 @@
 									array('label'=>'Classic', 'url'=>Yii::app()->createUrl('note/theme',array('theme'=>'classic'))),
 									),
 								),									
-								//array('label'=>Yii::app()->user->checkAccess('role_admin')?Yii::t('main','Admin'):'','url'=>Yii::app()->createUrl('admin')),
+								//array('label'=>Yii::app()->user->wcheckAccess('role_admin')?Yii::t('main','Admin'):'','url'=>Yii::app()->createUrl('admin')),
 								'---',
 								array('label' => Yii::app()->user->isGuest?Yii::t('main','Login'):Yii::t('main','Logout').' ('.Yii::app()->user->name.')' , 'url' => Yii::app()->user->isGuest?Yii::app()->createUrl('note/login'):Yii::app()->createUrl('note/logout')),
 							),

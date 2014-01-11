@@ -19,7 +19,7 @@
                     array('class' => 'span4', 'rows' => 5)
                 ); */
         // echo "view"; die; 
-        echo $form->hiddenField($model,'author_id',array('value'=>Yii::app()->user->id));
+        echo $form->hiddenField($model,'author_id',array('value'=>Yii::app()->user->getID()));
         ?>
 </fieldset>
 <div class="form-actions">

@@ -1,4 +1,4 @@
-<?php
+<?php 
 class PhpAuthManager extends CPhpAuthManager{
     public function init(){
         // Иерархию ролей расположим в файле auth.php в директории config приложения
@@ -10,11 +10,8 @@ class PhpAuthManager extends CPhpAuthManager{
         // Для гостей и так роль по умолчанию guest.
       
         if(!Yii::app()->user->isGuest){
-            // echo var_dump(Yii::app()->user->id); 
-            // echo var_dump(Yii::app()->user->role); die;
             // Связываем роль, заданную в БД с идентификатором пользователя
-            $this->assign(Yii::app()->user->role, Yii::app()->user->id);
-            // echo var_dump(Yii::app()->user->role); die;
+            $this->assign(Yii::app()->user->role, Yii::app()->user->getID());
 
         }
     }
