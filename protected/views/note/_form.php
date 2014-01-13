@@ -11,19 +11,15 @@
     <legend><?=Yii::t('main','New Note')?></legend>
         <?
         echo $form->errorSummary($model);
-        echo $form->textFieldRow($model, 'title', array('class' => 'span3'));
-        
-        echo $form->html5EditorRow(
-            $model,
-            'note',
-            array()
-        );
+        echo $form->textFieldRow($model, 'title', array('class' => 'span3'));   
+        echo $form->html5EditorRow($model,'note', array());
         /*echo $form->textAreaRow(
                     $model,
                     'note',
                     array('class' => 'span4', 'rows' => 5)
                 ); */
-        echo $form->hiddenField($model,'author_id',array('value'=>$model->author_id));
+        // echo "view"; die; 
+        echo $form->hiddenField($model,'author_id',array('value'=>Yii::app()->user->getID()));
         ?>
 </fieldset>
 <div class="form-actions">

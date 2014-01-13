@@ -12,7 +12,11 @@ $this->breadcrumbs=array(
 <h1>Login</h1>
 
 <p>Please fill out the following form with your login credentials:</p>
-
+<?php
+    if (Yii::app()->user->hasFlash('error')) {
+        echo '<div class="error">'.Yii::app()->user->getFlash('error').'</div>';
+    }
+?>
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
@@ -50,4 +54,9 @@ $this->breadcrumbs=array(
 	</div>
 
 <?php $this->endWidget(); ?>
+
 </div><!-- form -->
+<h2>Do you already have an account on one of these sites? Click the logo to log in with it here:</h2>
+<?php
+    $this->widget('ext.eauth.EAuthWidget', array('action' => 'note/login'));
+?>
