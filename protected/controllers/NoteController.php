@@ -48,7 +48,7 @@ class NoteController extends Controller
                         // var_dump($identity->id, $identity->name, Yii::app()->user->id);exit;
 
                         /***----- если сервис пользователя нет в таблице, то -----*****/
-                        if (!User::model()->findByAttributes(array('service_id'=>$identity->id))) {
+                        if (!User::model()->findByAttributes(array('service_id'=>(string)$identity->id))) {
 
 		                    /****Добавляем автора в таблицу User ****/
 							$user = new User;
@@ -59,7 +59,7 @@ class NoteController extends Controller
                         }
 							// нахожу id зашедшего пользователя по service_id
 							// и присваиваю его в user->id.
-							Yii::app()->user->setId(User::model()->findByAttributes(array('service_id'=>$identity->id))->id);
+							Yii::app()->user->setId(User::model()->findByAttributes(array('service_id'=>(string)$identity->id))->id);
                         // special redirect with closing popup window
                         $eauth->redirect();
                     }

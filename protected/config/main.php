@@ -57,36 +57,11 @@ return array(
                     'class' => 'GoogleOpenIDService',
                     //'realm' => '*.example.org',
                 ),
-                'yandex' => array(
-                    'class' => 'YandexOpenIDService',
-                    //'realm' => '*.example.org',
-                ),
-                'facebook' => array(
-                    // register your app here: https://developers.facebook.com/apps/
-                    'class' => 'FacebookOAuthService',
-                    'client_id' => '...',
-                    'client_secret' => '...',
-                ),
-                'github' => array(
-                    // register your app here: https://github.com/settings/applications
-                    'class' => 'GitHubOAuthService',
-                    'client_id' => '...',
-                    'client_secret' => '...',
-                ),
                 'vkontakte' => array(
                     // register your app here: https://vk.com/editapp?act=create&site=1
                     'class' => 'VKontakteOAuthService',
-                    'client_id' => '...',
-                    'client_secret' => '...',
-                ),
-                'odnoklassniki' => array(
-                    // register your app here: http://dev.odnoklassniki.ru/wiki/pages/viewpage.action?pageId=13992188
-                    // ... or here: http://www.odnoklassniki.ru/dk?st.cmd=appsInfoMyDevList&st._aid=Apps_Info_MyDev
-                    'class' => 'OdnoklassnikiOAuthService',
-                    'client_id' => '...',
-                    'client_public' => '...',
-                    'client_secret' => '...',
-                    'title' => 'Odnokl.',
+                    'client_id' => '4117226',
+                    'client_secret' => 'gXvrKfT7UhXl6PSKwb1h',
                 ),
             ),
         ),
